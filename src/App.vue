@@ -1,0 +1,99 @@
+<template>
+  <div id="app">
+    <hello></hello>
+  </div>
+</template>
+
+<script>
+import Hello from './components/Hello'
+
+export default {
+  name: 'app',
+
+  mounted () {
+    console.log('App -> mounted.')
+  },
+
+  components: {
+    Hello
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+html {
+  font-size: 10px;
+  /*background: url(http://i.imgur.com/b9r5sEL.jpg) bottom center;*/
+  background-size: cover;
+}
+
+body,html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.keys {
+  display: flex;
+  flex: 1;
+  /*min-height: 100vh;*/
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  display: inline-block;
+  border: 4px solid black;
+  border-radius: 5px;
+  margin: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem .5rem;
+  transition:all .07s;
+  width: 100px;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 5px black;
+}
+
+.playing {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 10px #ffc600;
+}
+
+kbd {
+  display: block;
+  font-size: 40px;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffc600;
+}
+
+.recordButton{
+  border: none;
+  outline: none;
+  background: none;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 0 0 5px black;
+}
+
+#selectbox{
+  width: 150px;
+}
+</style>
