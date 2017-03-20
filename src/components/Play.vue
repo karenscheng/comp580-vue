@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="play">
     <h1>{{ msg }}</h1>
     <h2>Step 1: Select a tempo</h2>
     <h2>Step 2: Hit 'record'</h2>
