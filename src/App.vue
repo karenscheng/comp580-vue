@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <hello></hello>
+    <play></play>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Home from './components/Home'
+import SetTempo from './components/SetTempo'
+import RecordPrompt from './components/RecordPrompt'
+import Play from './components/Play'
+import End from './components/End'
 
 export default {
   name: 'app',
@@ -15,7 +19,11 @@ export default {
   },
 
   components: {
-    Hello
+    Home,
+    SetTempo,
+    RecordPrompt,
+    Play,
+    End
   }
 }
 </script>
@@ -42,58 +50,4 @@ body,html {
   font-family: sans-serif;
 }
 
-.keys {
-  display: flex;
-  flex: 1;
-  /*min-height: 100vh;*/
-  align-items: center;
-  justify-content: center;
-}
-
-.key {
-  display: inline-block;
-  border: 4px solid black;
-  border-radius: 5px;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition:all .07s;
-  width: 100px;
-  text-align: center;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 5px black;
-}
-
-.playing {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 10px #ffc600;
-}
-
-kbd {
-  display: block;
-  font-size: 40px;
-}
-
-.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #ffc600;
-}
-
-.recordButton{
-  border: none;
-  outline: none;
-  background: none;
-  text-decoration: none;
-  color: white;
-  font-size: 1.5rem;
-  text-shadow: 0 0 5px black;
-}
-
-#selectbox{
-  width: 150px;
-}
 </style>
