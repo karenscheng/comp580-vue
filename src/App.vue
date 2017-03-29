@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <play></play>
+    <Home @startRecording="startRecording" @startPlaying="startPlaying"></Home>
+    <Play v-show="recording"></Play>
   </div>
 </template>
 
@@ -24,6 +25,14 @@ export default {
     RecordPrompt,
     Play,
     End
+  },
+
+  methods: {
+    startRecording () {
+
+    },
+    startPlaying () {
+    }
   }
 }
 </script>
@@ -35,7 +44,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 html {
