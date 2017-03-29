@@ -1,78 +1,84 @@
 <template>
-  <div class="play">
-    <h1>{{ msg }}</h1>
-    <h2>Step 1: Select a tempo</h2>
-    <h2>Step 2: Hit 'record'</h2>
-    <h2>Step 3: Hit keys!</h2>
+  <div class="record">
+    <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
 
-    <div id = "selectAndRecord" class = "keys">
-      <span id="selectbox" class = "key">
-        <select id="select" class ="recordButton" >
-            <option value='default'>SELECT TEMPO</option>
-            <option value='80'>SLOW</option>
-            <option value='120'>MEDIUM</option>
-            <option value='140'>FAST</option>
-          </select>
-      </span>
-      <div class = "key">
-        <button id="record" class = "recordButton" @click="startRecording">RECORD</button>
+    <div id="keys" v-show="recording">
+      <div id = "selectAndRecord" class = "keys">
+        <span id="selectbox" class = "key">
+          <select id="select" class ="recordButton" >
+              <option value='default'>SELECT TEMPO</option>
+              <option value='80'>SLOW</option>
+              <option value='120'>MEDIUM</option>
+              <option value='140'>FAST</option>
+            </select>
+        </span>
+        <div class = "key">
+          <button id="record" class = "recordButton" @click="startRecording">RECORD</button>
+        </div>
+      </div>
+
+      <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">clap</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">hihat</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">kick</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">openhat</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">boom</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">ride</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="sound">snare</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">tom</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="sound">tink</span>
+        </div>
+      </div>
+
+      <audio data-key="65" src="static/sounds/clap.wav"></audio>
+      <audio data-key="83" src="static/sounds/hihat.wav"></audio>
+      <audio data-key="68" src="static/sounds/kick.wav"></audio>
+      <audio data-key="70" src="static/sounds/openhat.wav"></audio>
+      <audio data-key="71" src="static/sounds/boom.wav"></audio>
+      <audio data-key="72" src="static/sounds/ride.wav"></audio>
+      <audio data-key="74" src="static/sounds/snare.wav"></audio>
+      <audio data-key="75" src="static/sounds/tom.wav"></audio>
+      <audio data-key="76" src="static/sounds/tink.wav"></audio>
       </div>
     </div>
-
-    <div class="keys">
-      <div data-key="65" class="key">
-        <kbd>A</kbd>
-        <span class="sound">clap</span>
-      </div>
-      <div data-key="83" class="key">
-        <kbd>S</kbd>
-        <span class="sound">hihat</span>
-      </div>
-      <div data-key="68" class="key">
-        <kbd>D</kbd>
-        <span class="sound">kick</span>
-      </div>
-      <div data-key="70" class="key">
-        <kbd>F</kbd>
-        <span class="sound">openhat</span>
-      </div>
-      <div data-key="71" class="key">
-        <kbd>G</kbd>
-        <span class="sound">boom</span>
-      </div>
-      <div data-key="72" class="key">
-        <kbd>H</kbd>
-        <span class="sound">ride</span>
-      </div>
-      <div data-key="74" class="key">
-        <kbd>J</kbd>
-        <span class="sound">snare</span>
-      </div>
-      <div data-key="75" class="key">
-        <kbd>K</kbd>
-        <span class="sound">tom</span>
-      </div>
-      <div data-key="76" class="key">
-        <kbd>L</kbd>
-        <span class="sound">tink</span>
-      </div>
-    </div>
-
-    <audio data-key="65" src="static/sounds/clap.wav"></audio>
-    <audio data-key="83" src="static/sounds/hihat.wav"></audio>
-    <audio data-key="68" src="static/sounds/kick.wav"></audio>
-    <audio data-key="70" src="static/sounds/openhat.wav"></audio>
-    <audio data-key="71" src="static/sounds/boom.wav"></audio>
-    <audio data-key="72" src="static/sounds/ride.wav"></audio>
-    <audio data-key="74" src="static/sounds/snare.wav"></audio>
-    <audio data-key="75" src="static/sounds/tom.wav"></audio>
-    <audio data-key="76" src="static/sounds/tink.wav"></audio>
-  </div>
 </template>
 
 <script>
+import RecordPrompt from './RecordPrompt'
+
 export default {
-  name: 'hello',
+  name: 'record',
+
+  props: [
+    'speed'
+  ],
+
   data () {
     return {
       msg: 'COMP580 Project',
@@ -81,20 +87,29 @@ export default {
       playBackDone: false,
       loop: false,
       play: false,
-      record: false
+      record: false,
+      prompt: true,
+      recording: false
     }
   },
 
   mounted () {
-    console.log('Hello -> mounted')
     window.addEventListener('keydown', this.keyPressed)
   },
 
-  beforeDestroy () {
-    console.log('Hello -> beforeDestroy')
+  components: {
+    RecordPrompt
+  },
+
+  created: function () {
+    console.log('speed: ' + this.speed)
   },
 
   methods: {
+    startNow () {
+      this.prompt = false
+      this.recording = true
+    },
     keyPressed (e) {
       console.log('Hello -> keyPressed')
 

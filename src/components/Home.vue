@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'Home',
   data () {
     return {
       msg: 'COMP580 Project',
@@ -51,6 +51,7 @@ export default {
   border-radius: 20px;
   margin: auto;
   text-align: center;
+  cursor: pointer;
 }
 
 #record{
