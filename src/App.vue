@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <Home v-show="home "@startRecording="startRecording" @startPlaying="startPlaying"></Home>
-    <Record v-show="recording" :tempo="this.speed"></Record>
-    <SetTempo v-show="tempo" @slowChosen="setTempo('slow')" @mediumChosen="setTempo('medium')" @fastChosen="setTempo('fast')"></SetTempo>
+    <Home v-if="home "@startRecording="startRecording" @startPlaying="startPlaying"></Home>
+    <Record v-if="recording" :speed="this.speed"></Record>
+    <SetTempo v-if="tempo" @slowChosen="setTempo('slow')" @mediumChosen="setTempo('medium')" @fastChosen="setTempo('fast')"></SetTempo>
     <!-- <RecordPrompt v-show="recordprompt"></RecordPrompt> -->
-    <End v-show="end"></End>
+    <Freeplay v-if="freeplay" @returnHome="returnHome"></Freeplay>
+    <End v-if="end"></End>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import Home from './components/Home'
 import SetTempo from './components/SetTempo'
 import RecordPrompt from './components/RecordPrompt'
+import Freeplay from './components/Freeplay'
 import Record from './components/Record'
 import End from './components/End'
 
@@ -24,6 +26,7 @@ export default {
       recording: false,
       tempo: false,
       recordprompt: false,
+      freeplay: false,
       end: false,
       speed: 0
     }
@@ -37,21 +40,26 @@ export default {
     Home,
     SetTempo,
     RecordPrompt,
+    Freeplay,
     Record,
     End
   },
 
   methods: {
+    returnHome () {
+      this.home = true
+      this.freeplay = false
+    },
     startRecording () {
       this.home = false
       this.tempo = true
     },
     startPlaying () {
       this.home = false
-      this.play = true
+      this.freeplay = true
     },
     setTempo (speed) {
-      console.log(speed)
+      console.log('in app, here is speed: ' + speed)
 
       if (speed === 'slow') {
         this.speed = 80

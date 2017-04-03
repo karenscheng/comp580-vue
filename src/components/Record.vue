@@ -3,7 +3,7 @@
     <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
 
     <div id="keys" v-show="recording">
-      <div id = "selectAndRecord" class = "keys">
+      <!-- <div id = "selectAndRecord" class = "keys">
         <span id="selectbox" class = "key">
           <select id="select" class ="recordButton" >
               <option value='default'>SELECT TEMPO</option>
@@ -15,44 +15,35 @@
         <div class = "key">
           <button id="record" class = "recordButton" @click="startRecording">RECORD</button>
         </div>
-      </div>
+      </div> -->
 
       <div class="keys">
         <div data-key="65" class="key">
-          <kbd>A</kbd>
-          <span class="sound">clap</span>
+          <span class="sound"></span>
         </div>
         <div data-key="83" class="key">
-          <kbd>S</kbd>
-          <span class="sound">hihat</span>
+          <span class="sound"></span>
         </div>
         <div data-key="68" class="key">
-          <kbd>D</kbd>
-          <span class="sound">kick</span>
+          <span class="sound"></span>
         </div>
         <div data-key="70" class="key">
-          <kbd>F</kbd>
-          <span class="sound">openhat</span>
+          <span class="sound"></span>
         </div>
         <div data-key="71" class="key">
-          <kbd>G</kbd>
-          <span class="sound">boom</span>
+          <span class="sound"></span>
         </div>
         <div data-key="72" class="key">
-          <kbd>H</kbd>
-          <span class="sound">ride</span>
+          <span class="sound"></span>
         </div>
         <div data-key="74" class="key">
-          <kbd>J</kbd>
-          <span class="sound">snare</span>
+          <span class="sound"></span>
         </div>
         <div data-key="75" class="key">
-          <kbd>K</kbd>
-          <span class="sound">tom</span>
+          <span class="sound"></span>
         </div>
         <div data-key="76" class="key">
-          <kbd>L</kbd>
-          <span class="sound">tink</span>
+          <span class="sound"></span>
         </div>
       </div>
 
@@ -87,7 +78,7 @@ export default {
       playBackDone: false,
       loop: false,
       play: false,
-      record: false,
+      record: true,
       prompt: true,
       recording: false
     }
@@ -102,7 +93,7 @@ export default {
   },
 
   created: function () {
-    console.log('speed: ' + this.speed)
+    console.log('speedy speed: ' + this.speed)
   },
 
   methods: {
@@ -111,6 +102,7 @@ export default {
       this.recording = true
     },
     keyPressed (e) {
+      console.log('from record script, speed is: ' + this.speed)
       console.log('Hello -> keyPressed')
 
       // uncomment below for some transitions that dont work :)
@@ -132,7 +124,8 @@ export default {
 
       if (this.record) {
         console.log('start timer!')
-        var tempo = document.getElementById('select').value
+        // var tempo = document.getElementById('select').value
+        const tempo = this.speed
         var recordTime = this.getRecordTime()
         var vm = this
 
@@ -158,7 +151,8 @@ export default {
       console.log(e)
     },
     startRecording (e) {
-      var tempo = document.getElementById('select').value
+      // var tempo = document.getElementById('select').value
+      const tempo = this.speed
       if (tempo === 'default') {
         // document.getElementById('pressRecord').css('visibility', 'hidden')
         this.record = false
@@ -202,47 +196,11 @@ export default {
         console.log('this key plays this many milliseconds after playback starts: ' + this.recordedSounds[j].date)
       }
 
-      this.loopIt()
-    },
-    playRecording (index) {
-      var playback
-      var vm = this
-      console.log('time to play the ' + index + 'sound in array')
-
-      if (this.recordedSounds[index] === undefined) {
-        console.log('stopping playback on index: ' + index)
-        clearTimeout(playback)
-        this.playbackDone = true
-      }
-
-      this.playSound(this.recordedSounds, index - 1)
-
-      if (!this.playbackDone) {
-        playback = setTimeout(function () {
-          console.log('in timeout function')
-          vm.playRecording(index + 1)
-        }, this.recordedSounds[index].date)
-      } else {
-        this.playbackDone = false
-      }
-    },
-    playSound (sound, index) {
-      var audioString = 'audio[data-key="' + sound[index].key + '"]'
-      var audio = document.querySelector(audioString)
-      audio.currentTime = 0
-      audio.play()
-    },
-    loopIt () {
-      var recordTime = this.getRecordTime()
-      var vm = this
-
-      setTimeout(function () {
-        vm.playRecording(1)
-        vm.loopIt(this.recordedSounds)
-      }, recordTime)
+      // this.loopIt()
     },
     getRecordTime () {
-      var tempo = document.getElementById('select').value
+      // var tempo = document.getElementById('select').value
+      var tempo = this.speed
       tempo = (60 / tempo) * 8000
       return tempo
     }
@@ -252,6 +210,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.record {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .keys {
   display: flex;
@@ -269,11 +234,11 @@ export default {
   font-size: 1.5rem;
   padding: 1rem .5rem;
   transition:all .07s;
-  width: 100px;
+  width: 50px;
+  height: 50px;
   text-align: center;
   color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 5px black;
+  background: white;
 }
 
 .playing-transition {
