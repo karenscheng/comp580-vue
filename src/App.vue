@@ -5,7 +5,6 @@
     <SetTempo v-if="tempo" @slowChosen="setTempo('slow')" @mediumChosen="setTempo('medium')" @fastChosen="setTempo('fast')"></SetTempo>
     <!-- <RecordPrompt v-show="recordprompt"></RecordPrompt> -->
     <Freeplay v-if="freeplay" @returnHome="returnHome"></Freeplay>
-    <End v-if="end"></End>
   </div>
 </template>
 

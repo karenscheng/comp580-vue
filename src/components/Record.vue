@@ -1,6 +1,7 @@
 <template>
   <div class="record">
     <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
+    <End v-if="end" :recordedSounds="recordedSounds"></End>
 
     <div id="keys" v-show="recording">
       <!-- <div id = "selectAndRecord" class = "keys">
