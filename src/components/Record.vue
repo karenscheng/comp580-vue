@@ -63,6 +63,7 @@
 
 <script>
 import RecordPrompt from './RecordPrompt'
+import End from './End'
 
 export default {
   name: 'record',
@@ -81,7 +82,8 @@ export default {
       play: false,
       record: true,
       prompt: true,
-      recording: false
+      recording: false,
+      end: false
     }
   },
 
@@ -90,7 +92,8 @@ export default {
   },
 
   components: {
-    RecordPrompt
+    RecordPrompt,
+    End
   },
 
   created: function () {
@@ -101,6 +104,8 @@ export default {
     startNow () {
       this.prompt = false
       this.recording = true
+      // this.recording = false
+      // this.end = true
     },
     keyPressed (e) {
       console.log('from record script, speed is: ' + this.speed)
@@ -133,6 +138,9 @@ export default {
         if (this.firstKeyPressed) {
           setTimeout(function () {
             this.record = false
+            console.log('omg I don\'t know why this next line runs but doesn\'t do anything!!!')
+            this.end = true
+            this.recording = false
             // call to function that takes in an array and a tempo in order to set the time stamps correctly and set firstKeyPressed to true
             vm.quantize(tempo)
             this.firstKeyPressed = true
