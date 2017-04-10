@@ -1,9 +1,9 @@
 <template>
   <div class="record">
     <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
-    <End v-if="end" :recordedSounds="recordedSounds"></End>
+    <End v-if="end" :recordedSounds="recordedSounds" :speed="speed" @done="finish"></End>
 
-    <div id="keys" v-show="recording">
+    <div id="keys" v-if="recording">
       <!-- <div id = "selectAndRecord" class = "keys">
         <span id="selectbox" class = "key">
           <select id="select" class ="recordButton" >
@@ -103,7 +103,10 @@ export default {
   methods: {
     startNow () {
       this.prompt = false
-      this.recording = true
+
+      if (!this.end) {
+        this.recording = true
+      }
       // this.recording = false
       // this.end = true
     },
@@ -206,12 +209,18 @@ export default {
       }
 
       // this.loopIt()
+      this.end = true
+      this.recording = false
     },
     getRecordTime () {
       // var tempo = document.getElementById('select').value
       var tempo = this.speed
       tempo = (60 / tempo) * 8000
       return tempo
+    },
+    finish () {
+      this.$emit('done')
+      this.end = false
     }
   }
 }

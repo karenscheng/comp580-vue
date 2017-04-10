@@ -9,9 +9,18 @@
   <div class="layer-btn button">
     <p class="text">layer beat</p>
   </div>
-  <div class="start-over button">
+  <div class="start-over button" @click="startOver">
     <p class="text">START OVER</p>
   </div>
+  <audio data-key="65" src="static/sounds/clap.wav"></audio>
+  <audio data-key="83" src="static/sounds/hihat.wav"></audio>
+  <audio data-key="68" src="static/sounds/kick.wav"></audio>
+  <audio data-key="70" src="static/sounds/openhat.wav"></audio>
+  <audio data-key="71" src="static/sounds/boom.wav"></audio>
+  <audio data-key="72" src="static/sounds/ride.wav"></audio>
+  <audio data-key="74" src="static/sounds/snare.wav"></audio>
+  <audio data-key="75" src="static/sounds/tom.wav"></audio>
+  <audio data-key="76" src="static/sounds/tink.wav"></audio>
 </div>
 </template>
 
@@ -21,12 +30,14 @@ export default {
   name: 'end',
 
   props: [
-    'recordedSounds'
+    'recordedSounds',
+    'speed'
   ],
 
   data () {
     return {
-      play: true
+      play: true,
+      loop: null
     }
   },
 
@@ -63,13 +74,28 @@ export default {
       var recordTime = this.getRecordTime()
       var vm = this
 
-      setTimeout(function () {
+      vm.playRecording(1)
+      this.loop = setTimeout(function () {
         vm.playRecording(1)
         vm.loopIt(this.recordedSounds)
       }, recordTime)
     },
     togglePlay () {
       this.play = !this.play
+      if (!this.play) {
+        this.loopIt()
+      } else {
+        clearTimeout(this.loop)
+      }
+    },
+    getRecordTime () {
+      // var tempo = document.getElementById('select').value
+      var tempo = this.speed
+      tempo = (60 / tempo) * 8000
+      return tempo
+    },
+    startOver () {
+      this.$emit('done')
     }
   }
 }
