@@ -6,7 +6,7 @@
   <div class="stop-btn button" @click="togglePlay" v-else>
     <p class="text">stop recording</p>
   </div>
-  <div class="layer-btn button">
+  <div class="layer-btn button" @click="addLayer">
     <p class="text">layer beat</p>
   </div>
   <div class="start-over button">
@@ -70,6 +70,9 @@ export default {
     },
     togglePlay () {
       this.play = !this.play
+    },
+    addLayer () {
+
     }
   }
 }
