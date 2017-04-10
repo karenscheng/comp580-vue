@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Home v-if="home "@startRecording="startRecording" @startPlaying="startPlaying"></Home>
-    <Record v-if="recording" :speed="this.speed"></Record>
+    <Record v-if="recording" :speed="this.speed" @done="finish"></Record>
     <SetTempo v-if="tempo" @slowChosen="setTempo('slow')" @mediumChosen="setTempo('medium')" @fastChosen="setTempo('fast')"></SetTempo>
     <!-- <RecordPrompt v-show="recordprompt"></RecordPrompt> -->
     <Freeplay v-if="freeplay" @returnHome="returnHome"></Freeplay>
@@ -72,6 +72,10 @@ export default {
 
       this.recording = true
       this.tempo = false
+    },
+    finish () {
+      this.recording = false
+      this.home = true
     }
   }
 }
