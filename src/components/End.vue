@@ -12,15 +12,34 @@
   <div class="start-over button" @click="startOver">
     <p class="text">START OVER</p>
   </div>
-  <audio data-key="65" src="static/sounds/clap.wav"></audio>
-  <audio data-key="83" src="static/sounds/hihat.wav"></audio>
-  <audio data-key="68" src="static/sounds/kick.wav"></audio>
-  <audio data-key="70" src="static/sounds/openhat.wav"></audio>
-  <audio data-key="71" src="static/sounds/boom.wav"></audio>
-  <audio data-key="72" src="static/sounds/ride.wav"></audio>
-  <audio data-key="74" src="static/sounds/snare.wav"></audio>
-  <audio data-key="75" src="static/sounds/tom.wav"></audio>
+  <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
+  <audio data-key="87" src="static/sounds/clay.mp3"></audio>
+  <audio data-key="69" src="static/sounds/confetti.mp3"></audio>
+  <audio data-key="82" src="static/sounds/corona.mp3"></audio>
+  <audio data-key="84" src="static/sounds/dotted-spiral.mp3"></audio>
+  <audio data-key="89" src="static/sounds/flash-1.mp3"></audio>
+  <audio data-key="85" src="static/sounds/flash-2.mp3"></audio>
+  <audio data-key="73" src="static/sounds/flash-3.mp3"></audio>
+  <audio data-key="79" src="static/sounds/glimmer.mp3"></audio>
+  <audio data-key="80" src="static/sounds/moon.mp3"></audio>
+
+  <audio data-key="65" src="static/sounds/splits.mp3"></audio>
+  <audio data-key="83" src="static/sounds/squiggle.mp3"></audio>
+  <audio data-key="68" src="static/sounds/strike.mp3"></audio>
+  <audio data-key="70" src="static/sounds/suspension.mp3"></audio>
+  <audio data-key="71" src="static/sounds/timer.mp3"></audio>
+  <audio data-key="72" src="static/sounds/ufo.mp3"></audio>
+  <audio data-key="74" src="static/sounds/veil.mp3"></audio>
+  <audio data-key="75" src="static/sounds/wipe.mp3"></audio>
   <audio data-key="76" src="static/sounds/tink.wav"></audio>
+
+  <audio data-key="90" src="static/sounds/pinwheel.mp3"></audio>
+  <audio data-key="88" src="static/sounds/piston-1.mp3"></audio>
+  <audio data-key="67" src="static/sounds/piston-2.mp3"></audio>
+  <audio data-key="86" src="static/sounds/piston-3.mp3"></audio>
+  <audio data-key="66" src="static/sounds/prism-1.mp3"></audio>
+  <audio data-key="78" src="static/sounds/prism-2.mp3"></audio>
+  <audio data-key="77" src="static/sounds/prism-3.mp3"></audio>
 </div>
 </template>
 

@@ -3,47 +3,127 @@
 
     <div class="container">
 
+      <div id="heading" class="text">
+        <p>Press keys to produce sounds!</p>
+      </div>
+
     <div id="keys">
 
       <div class="keys">
-        <div data-key="65" class="key">
-          <span class="sound"></span>
+        <div class="top-row">
+          <div data-key="81" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="87" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="69" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="82" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="84" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="89" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="85" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="73" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="79" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="80" class="key">
+            <span class="sound"></span>
+          </div>
         </div>
-        <div data-key="83" class="key">
-          <span class="sound"></span>
+        <div class="middle-row">
+          <div data-key="65" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="83" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="68" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="70" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="71" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="72" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="74" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="75" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="76" class="key">
+            <span class="sound"></span>
+          </div>
         </div>
-        <div data-key="68" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="70" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="71" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="72" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="74" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="75" class="key">
-          <span class="sound"></span>
-        </div>
-        <div data-key="76" class="key">
-          <span class="sound"></span>
+        <div class="bottom-row">
+          <div data-key="65" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="83" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="68" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="70" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="71" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="72" class="key">
+            <span class="sound"></span>
+          </div>
+          <div data-key="74" class="key">
+            <span class="sound"></span>
+          </div>
         </div>
       </div>
 
-      <audio data-key="65" src="static/sounds/clap.wav"></audio>
-      <audio data-key="83" src="static/sounds/hihat.wav"></audio>
-      <audio data-key="68" src="static/sounds/kick.wav"></audio>
-      <audio data-key="70" src="static/sounds/openhat.wav"></audio>
-      <audio data-key="71" src="static/sounds/boom.wav"></audio>
-      <audio data-key="72" src="static/sounds/ride.wav"></audio>
-      <audio data-key="74" src="static/sounds/snare.wav"></audio>
-      <audio data-key="75" src="static/sounds/tom.wav"></audio>
+      <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
+      <audio data-key="87" src="static/sounds/clay.mp3"></audio>
+      <audio data-key="69" src="static/sounds/confetti.mp3"></audio>
+      <audio data-key="82" src="static/sounds/corona.mp3"></audio>
+      <audio data-key="84" src="static/sounds/dotted-spiral.mp3"></audio>
+      <audio data-key="89" src="static/sounds/flash-1.mp3"></audio>
+      <audio data-key="85" src="static/sounds/flash-2.mp3"></audio>
+      <audio data-key="73" src="static/sounds/flash-3.mp3"></audio>
+      <audio data-key="79" src="static/sounds/glimmer.mp3"></audio>
+      <audio data-key="80" src="static/sounds/moon.mp3"></audio>
+
+      <audio data-key="65" src="static/sounds/splits.mp3"></audio>
+      <audio data-key="83" src="static/sounds/squiggle.mp3"></audio>
+      <audio data-key="68" src="static/sounds/strike.mp3"></audio>
+      <audio data-key="70" src="static/sounds/suspension.mp3"></audio>
+      <audio data-key="71" src="static/sounds/timer.mp3"></audio>
+      <audio data-key="72" src="static/sounds/ufo.mp3"></audio>
+      <audio data-key="74" src="static/sounds/veil.mp3"></audio>
+      <audio data-key="75" src="static/sounds/wipe.mp3"></audio>
       <audio data-key="76" src="static/sounds/tink.wav"></audio>
+
+      <audio data-key="90" src="static/sounds/pinwheel.mp3"></audio>
+      <audio data-key="88" src="static/sounds/piston-1.mp3"></audio>
+      <audio data-key="67" src="static/sounds/piston-2.mp3"></audio>
+      <audio data-key="86" src="static/sounds/piston-3.mp3"></audio>
+      <audio data-key="66" src="static/sounds/prism-1.mp3"></audio>
+      <audio data-key="78" src="static/sounds/prism-2.mp3"></audio>
+      <audio data-key="77" src="static/sounds/prism-3.mp3"></audio>
       </div>
 
       <div id = "return" @click="returnHome">
@@ -107,9 +187,6 @@ export default {
 }
 
 .keys {
-  /*display: flex;*/
-  /*flex: 1;*/
-  /*min-height: 100vh;*/
   align-items: center;
   justify-content: center;
 }
@@ -127,17 +204,6 @@ export default {
   text-align: center;
   color: white;
   background: white;
-}
-
-.playing-transition {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 10px #ffc600;
-}
-
-kbd {
-  display: block;
-  font-size: 40px;
 }
 
 .sound {
