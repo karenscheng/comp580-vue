@@ -1,7 +1,7 @@
 <template>
   <div class="record">
     <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
-    <End v-if="end" :recordedSounds="recordedSounds" :speed="speed" @done="finish"></End>
+    <End v-if="end" :recordedSounds="recordedSounds" :speed="speed" @done="finish" @addlayer="addLayer"></End>
 
     <div id="keys" v-if="recording">
       <!-- <div id = "selectAndRecord" class = "keys">
@@ -78,12 +78,13 @@ export default {
       recordedSounds: [],
       firstKeyPressed: true,
       playBackDone: false,
-      loop: false,
       play: false,
       record: true,
       prompt: true,
       recording: false,
-      end: false
+      end: false,
+      loop: null,
+      layer: false
     }
   },
 
@@ -107,8 +108,27 @@ export default {
       if (!this.end) {
         this.recording = true
       }
+      this.playTempo()
       // this.recording = false
       // this.end = true
+    },
+    playTempo () {
+      var tempo = 60 / this.speed * 1000
+      var vm = this
+      if (!this.layer) {
+        this.loop = setTimeout(function () {
+          vm.playSound(76)
+          vm.playTempo()
+        }, tempo)
+      }
+    },
+    playSound (index) {
+      var audioString = 'audio[data-key="' + index + '"]'
+      console.log(audioString)
+      var audio = document.querySelector(audioString)
+      console.log(audio)
+      audio.currentTime = 0
+      audio.play()
     },
     keyPressed (e) {
       console.log('from record script, speed is: ' + this.speed)
@@ -217,6 +237,9 @@ export default {
       var tempo = this.speed
       tempo = (60 / tempo) * 8000
       return tempo
+    },
+    addLayer () {
+      this.layer = true
     },
     finish () {
       this.$emit('done')

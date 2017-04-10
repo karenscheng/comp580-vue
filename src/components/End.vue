@@ -66,6 +66,7 @@ export default {
     },
     playSound (sound, index) {
       var audioString = 'audio[data-key="' + sound[index].key + '"]'
+      console.log(audioString)
       var audio = document.querySelector(audioString)
       audio.currentTime = 0
       audio.play()
@@ -98,7 +99,7 @@ export default {
       this.$emit('done')
     },
     addLayer () {
-
+      this.$emit('addlayer')
     }
   }
 }
