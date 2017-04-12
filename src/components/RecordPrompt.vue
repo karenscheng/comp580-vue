@@ -1,6 +1,6 @@
 <template>
 <div class = "recordprompt">
-  <h1>We will start recording once you start playing!</h1>
+  <h1>We will start recording once you start playing! Press Enter to continue!</h1>
 </div>
 </template>
 

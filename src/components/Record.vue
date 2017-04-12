@@ -1,6 +1,6 @@
 <template>
   <div class="record">
-    <RecordPrompt v-show="prompt" @start="startNow"></RecordPrompt>
+    <RecordPrompt v-if="prompt" @start="startNow"></RecordPrompt>
     <End v-if="end" :recordedSounds="recordedSounds" :speed="speed" @done="finish" @addlayer="addLayer"></End>
 
     <div id="keys" v-if="recording">
@@ -166,26 +166,27 @@ export default {
 
   methods: {
     startNow () {
+      this.playTempo()
       this.prompt = false
 
       if (!this.end) {
         this.recording = true
       }
-      this.playTempo()
       // this.recording = false
       // this.end = true
     },
     playTempo () {
+      console.log('inside of play tempo')
       var tempo = 60 / this.speed * 1000
       var vm = this
       if (!this.layer) {
         this.loop = setTimeout(function () {
-          vm.playSound(76)
+          vm.playClick(76)
           vm.playTempo()
         }, tempo)
       }
     },
-    playSound (index) {
+    playClick (index) {
       var audioString = 'audio[data-key="' + index + '"]'
       console.log(audioString)
       var audio = document.querySelector(audioString)
@@ -205,13 +206,14 @@ export default {
       //   console.log(myDiv)
       // }
       console.log('Just pressed key: ' + e.keyCode)
-
+      this.record = true
       var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
       try {
         audio.currentTime = 0
         audio.play()
       } catch (err) {
         console.log('Key pressed but no audio associated')
+        this.record = false
       }
 
       if (this.record) {
@@ -292,6 +294,7 @@ export default {
 
       // this.loopIt()
       this.end = true
+      clearTimeout(this.loop)
       this.recording = false
     },
     getRecordTime () {
@@ -300,8 +303,51 @@ export default {
       tempo = (60 / tempo) * 8000
       return tempo
     },
+    playRecording (index) {
+      var playback
+      var vm = this
+      console.log('time to play the ' + index + 'sound in array')
+
+      if (this.recordedSounds[index] === undefined) {
+        console.log('stopping playback on index: ' + index)
+        clearTimeout(playback)
+        this.playbackDone = true
+      }
+
+      this.playSound(this.recordedSounds, index - 1)
+
+      if (!this.playbackDone) {
+        playback = setTimeout(function () {
+          console.log('in timeout function')
+          vm.playRecording(index + 1)
+        }, this.recordedSounds[index].date)
+      } else {
+        this.playbackDone = false
+      }
+    },
+    playSound (sound, index) {
+      var audioString = 'audio[data-key="' + sound[index].key + '"]'
+      console.log(audioString)
+      var audio = document.querySelector(audioString)
+      audio.currentTime = 0
+      audio.play()
+    },
+    loopIt () {
+      var recordTime = this.getRecordTime()
+      var vm = this
+
+      vm.playRecording(1)
+      this.loop = setTimeout(function () {
+        vm.playRecording(1)
+        vm.loopIt(this.recordedSounds)
+      }, recordTime)
+    },
     addLayer () {
+      this.end = false
+      this.recording = true
       this.layer = true
+      this.firstKeyPressed = true
+      this.loopIt()
     },
     finish () {
       this.$emit('done')
