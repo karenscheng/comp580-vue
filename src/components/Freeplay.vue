@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
+      <!-- <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
       <audio data-key="87" src="static/sounds/clay.mp3"></audio>
       <audio data-key="69" src="static/sounds/confetti.mp3"></audio>
       <audio data-key="82" src="static/sounds/corona.mp3"></audio>
@@ -123,7 +123,7 @@
       <audio data-key="86" src="static/sounds/piston-3.mp3"></audio>
       <audio data-key="66" src="static/sounds/prism-1.mp3"></audio>
       <audio data-key="78" src="static/sounds/prism-2.mp3"></audio>
-      <audio data-key="77" src="static/sounds/prism-3.mp3"></audio>
+      <audio data-key="77" src="static/sounds/prism-3.mp3"></audio> -->
       </div>
 
       <div id = "return" @click="returnHome">
@@ -137,6 +137,10 @@
 
 export default {
   name: 'freeplay',
+
+  props: [
+    'soundMap'
+  ],
 
   created () {
     window.addEventListener('keydown', this.keyPressed)
@@ -153,13 +157,15 @@ export default {
       // }
       console.log('Just pressed key: ' + e.keyCode)
 
-      var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
-      try {
-        audio.currentTime = 0
-        audio.play()
-      } catch (err) {
-        console.log('Key pressed but no audio associated')
-      }
+      this.soundMap.get(e.keyCode).play()
+
+      // var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
+      // try {
+      //   audio.currentTime = 0
+      //   audio.play()
+      // } catch (err) {
+      //   console.log('Key pressed but no audio associated')
+      // }
     },
     returnHome () {
       this.$emit('returnHome')
