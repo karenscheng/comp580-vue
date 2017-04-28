@@ -34,7 +34,6 @@ export default {
 
   mounted () {
     console.log('App -> mounted.')
-    this.setSoundMap()
   },
 
   components: {
@@ -47,45 +46,6 @@ export default {
   },
 
   methods: {
-    setSoundMap () {
-      this.soundMap = new Map()
-
-      soundMap.set(81, 'bubbles')
-      soundMap.set(87, 'clay')
-      soundMap.set(69, 'confetti')
-      soundMap.set(82, 'corona')
-      soundMap.set(84, 'dotted-spiral')
-      soundMap.set(89, 'flash-1')
-      soundMap.set(85, 'flash-2')
-      soundMap.set(73, 'flash-3')
-      soundMap.set(79, 'glimmer')
-      soundMap.set(80, 'moon')
-      soundMap.set(65, 'splits')
-      soundMap.set(83, 'squiggle')
-      soundMap.set(68, 'strike')
-      soundMap.set(70, 'suspension')
-      soundMap.set(71, 'timer')
-      soundMap.set(72, 'ufo')
-      soundMap.set(74, 'veil')
-      soundMap.set(75, 'wipe')
-      soundMap.set(76, 'tink')
-      soundMap.set(90, 'pinwheel')
-      soundMap.set(88, 'piston-1')
-      soundMap.set(67, 'piston-2')
-      soundMap.set(86, 'piston-3')
-      soundMap.set(66, 'prism-1')
-      soundMap.set(78, 'prism-2')
-      soundMap.set(77, 'prism-3')
-
-      // for(var key of soundMap.keys()) {
-      //   var name = soundMap.get(key)
-      //   var path = '/static/sounds/' + name + '.mp3'
-      //   var sound = new Howl({
-      //     src: [path]
-      //   });
-      //   soundMap.set(key, sound)
-      // }
-    },
     returnHome () {
       this.home = true
       this.freeplay = false
