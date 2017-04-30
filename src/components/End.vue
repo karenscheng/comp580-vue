@@ -144,14 +144,22 @@ export default {
   margin-bottom: 2vh;
 }
 
+.play-btn:hover {
+  background-color: #97d5b6;
+}
+
 .stop-btn {
   background-color: #e67c84;
   height: 30vh;
   margin-bottom: 2vh;
 }
 
+.stop-btn:hover {
+  background-color: #eb969c;
+}
+
 .layer-btn {
-  background-color: #BDBEC0;
+  background-color: #D3D3D3;
   height: 18vh;
   margin-bottom: 2vh;
 }
@@ -159,6 +167,7 @@ export default {
 .start-over {
   border: 3px solid black;
   height: 40vh;
+  background-color: rgba(256, 256, 256, 0.8);
 }
 
 .start-over .text {

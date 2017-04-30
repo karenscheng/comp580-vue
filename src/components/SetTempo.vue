@@ -36,6 +36,12 @@ export default {
 
 <style scoped>
 
+#SetTempo {
+  padding-top: 10px;
+  height: 100vh;
+  width: 100vw;
+}
+
 h1 {
   font-size: 80px;
   font-family: sans-serif;
@@ -66,11 +72,23 @@ h1 {
   background-color: #e67c84;
 }
 
+#slow:hover {
+  background-color: #eb969c;
+}
+
 #medium{
   background-color: #f5f299;
 }
 
+#medium:hover {
+  background-color: #f7f4ad;
+}
+
 #fast{
   background-color: #6bc497;
+}
+
+#fast:hover {
+  background-color: #97d5b6;
 }
 </style>

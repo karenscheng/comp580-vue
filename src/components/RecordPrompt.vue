@@ -1,6 +1,6 @@
 <template>
 <div class = "recordprompt">
-  <h1>We will start recording once you start playing! Press Enter to continue!</h1>
+  <h1>We will start recording once you start playing! Press Enter to continue.</h1>
 </div>
 </template>
 
@@ -21,5 +21,18 @@ export default {
 </script>
 
 <style scoped>
+
+.recordprompt {
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1{
+  font-size: 32px;
+}
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Home v-if="home "@startRecording="startRecording" @startPlaying="startPlaying"></Home>
-    <Record v-if="recording" :speed="this.speed" @done="finish" :soundMap="this.soundMap"></Record>
+    <Record v-if="recording" :speed="this.speed" @done="finish" :soundMap="this.soundMap" @showHome = "returnHome"></Record>
     <SetTempo v-if="tempo" @slowChosen="setTempo('slow')" @mediumChosen="setTempo('medium')" @fastChosen="setTempo('fast')"></SetTempo>
     <!-- <RecordPrompt v-show="recordprompt"></RecordPrompt> -->
     <Freeplay v-if="freeplay" @returnHome="returnHome" :soundMap="this.soundMap"></Freeplay>
@@ -89,8 +89,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  background: linear-gradient(141deg, #FFFFFF 0%,#808080 100%);
+  height: 100vh;
+  width: 100vw;
 }
 
 html {

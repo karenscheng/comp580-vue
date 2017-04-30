@@ -190,6 +190,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 }
 
 .keys {
@@ -199,7 +200,7 @@ export default {
 
 .key {
   display: inline-block;
-  border: 4px solid black;
+  border: 4px solid #2c3e50;
   border-radius: 5px;
   margin: 1rem;
   font-size: 1.5rem;
@@ -209,7 +210,8 @@ export default {
   height: 50px;
   text-align: center;
   color: white;
-  background: white;
+  background: rgba(256, 256, 256, 0.8);
+  /*background: linear-gradient(141deg, #d597b6 0%, #c46b98 51%, #9c5579 75%);*/
 }
 
 .sound {
@@ -230,6 +232,11 @@ export default {
   cursor: pointer;
   background-color: #6bc497;
   height: 200px;
+  border: 5px solid #2c3e50;
+}
+
+#return:hover {
+  background-color: #97d5b6;
 }
 
 </style>

@@ -5,6 +5,8 @@
 
     <div id="keys" v-if="recording">
 
+      <h1>Press keys on your keyboard to make sound, we will start recording once you play your first sound!</h1>
+
       <div class="keys">
         <div class="top-row">
           <div data-key="81" class="key">
@@ -90,6 +92,10 @@
             <span class="sound"></span>
           </div>
         </div>
+      </div>
+
+      <div class="cancel button" @click="goHome">
+        <p class="text">cancel</p>
       </div>
 
       <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
@@ -368,6 +374,9 @@ export default {
       this.recordedSounds = []
       this.$emit('done')
       this.end = false
+    },
+    goHome () {
+      window.location = '/'
     }
   }
 }
@@ -381,6 +390,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 }
 
 .keys {
@@ -399,8 +409,13 @@ export default {
   width: 50px;
   height: 50px;
   text-align: center;
-  color: white;
-  background: white;
+  background: rgba(256, 256, 256, 0.8);
+}
+
+h1{
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 8vh;
 }
 
 .sound {
@@ -422,6 +437,34 @@ export default {
 
 #selectbox{
   width: 150px;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  border-radius: 20px;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  border: 5px solid #2c3e50;
+}
+
+.cancel {
+  background-color: #e67c84;
+  height: 12vh;
+  margin-top: 5vh;
+}
+
+.cancel:hover {
+  background-color: #eb969c;
+}
+
+.cancel .text {
+  font-size: 34px;
 }
 
 </style>
