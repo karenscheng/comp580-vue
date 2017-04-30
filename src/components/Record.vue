@@ -258,7 +258,7 @@ export default {
       }
 
       var subdivision = 60 / tempo
-      subdivision = subdivision / 4 // subdivision is how much time between each 16th note
+      subdivision = subdivision / 2 // subdivision is how much time between each 16th note
       subdivision = subdivision * 1000 // convert subdivision to milliseconds
 
       if (!this.layer) {
@@ -269,9 +269,9 @@ export default {
       for (i = 0; i < sounds.length; i++) {
         if (sounds[i].date >= this.initialTime) {
           sounds[i].date %= this.initialTime
-          if (this.layer) {
-            sounds[i].date %= this.getRecordTime()
-          }
+          // if (this.layer) {
+          //   sounds[i].date %= this.getRecordTime()
+          // }
           console.log('current hit: ' + sounds[i].key + ' and its time from first hit: ' + sounds[i].date)
             // this.recordedSounds[i].date -= toSubtract
             // toSubtract += this.recordedSounds[i].date
@@ -329,6 +329,8 @@ export default {
     loopIt () {
       var recordTime = this.getRecordTime()
       var vm = this
+
+      this.initialTime = new Date().getTime()
 
       vm.playRecording(1)
       this.loopRecording = setTimeout(function () {
