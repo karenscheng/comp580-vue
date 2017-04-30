@@ -139,6 +139,7 @@ export default {
     return {
       msg: 'COMP580 Project',
       recordedSounds: [],
+      layeredSounds: [],
       firstKeyPressed: true,
       playBackDone: false,
       play: false,
@@ -146,8 +147,10 @@ export default {
       prompt: true,
       recording: false,
       end: false,
-      loop: null,
-      layer: false
+      loopTempo: null,
+      loopRecording: null,
+      layer: false,
+      initialTime: 0
     }
   },
 
@@ -158,10 +161,6 @@ export default {
   components: {
     RecordPrompt,
     End
-  },
-
-  created: function () {
-    console.log('speedy speed: ' + this.speed)
   },
 
   methods: {
@@ -176,28 +175,20 @@ export default {
       // this.end = true
     },
     playTempo () {
-      console.log('inside of play tempo')
       var tempo = 60 / this.speed * 1000
       var vm = this
-      if (!this.layer) {
-        this.loop = setTimeout(function () {
-          vm.playClick(76)
-          vm.playTempo()
-        }, tempo)
-      }
+      this.loopTempo = setInterval(function () {
+        vm.playClick(76)
+        // vm.playTempo()
+      }, tempo)
     },
     playClick (index) {
       var audioString = 'audio[data-key="' + index + '"]'
-      console.log(audioString)
       var audio = document.querySelector(audioString)
-      console.log(audio)
       audio.currentTime = 0
       audio.play()
     },
     keyPressed (e) {
-      console.log('from record script, speed is: ' + this.speed)
-      console.log('Hello -> keyPressed')
-
       // uncomment below for some transitions that dont work :)
       // var myDiv = document.querySelector('div[data-key="' + e.keyCode + '"]')
       // if (myDiv) {
@@ -205,7 +196,6 @@ export default {
       //   myDiv.addEventListener('transitionend', this.removeClass())
       //   console.log(myDiv)
       // }
-      console.log('Just pressed key: ' + e.keyCode)
       this.record = true
       var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
       try {
@@ -217,8 +207,6 @@ export default {
       }
 
       if (this.record) {
-        console.log('start timer!')
-        // var tempo = document.getElementById('select').value
         const tempo = this.speed
         var recordTime = this.getRecordTime()
         var vm = this
@@ -231,7 +219,6 @@ export default {
             // call to function that takes in an array and a tempo in order to set the time stamps correctly and set firstKeyPressed to true
             vm.quantize(tempo)
             this.firstKeyPressed = true
-            console.log('end timer!')
           }, recordTime) // value from selector
           this.firstKeyPressed = false
         }
@@ -239,8 +226,13 @@ export default {
         var newDate = new Date().getTime()
         var newSound = {date: newDate, key: e.keyCode}
 
-        this.recordedSounds.push(newSound)
-        console.table(this.recordedSounds)
+        if (this.layer) {
+          this.layeredSounds.push(newSound)
+          console.table(this.layeredSounds)
+        } else {
+          this.recordedSounds.push(newSound)
+          console.table(this.recordedSounds)
+        }
       }
     },
     removeClass (e) {
@@ -252,49 +244,55 @@ export default {
       if (tempo === 'default') {
         // document.getElementById('pressRecord').css('visibility', 'hidden')
         this.record = false
-        console.log('can\'t record now')
       } else {
-        console.log('recording!')
         this.record = true
       }
     },
     quantize (tempo) {
+      var sounds
+
+      if (this.layer) {
+        sounds = this.layeredSounds
+      } else {
+        sounds = this.recordedSounds
+      }
+
       var subdivision = 60 / tempo
       subdivision = subdivision / 4 // subdivision is how much time between each 16th note
       subdivision = subdivision * 1000 // convert subdivision to milliseconds
 
-      console.log('tempo is ' + tempo)
-      console.log('subdivision is: ' + subdivision)
-
-      var initialTime = this.recordedSounds[0].date // sets the time of the first hit to adjust time of other hits to be relative
-      var toSubtract = 0
+      if (!this.layer) {
+        this.initialTime = sounds[0].date // sets the time of the first hit to adjust time of other hits to be relative
+      }
 
       var i
-      for (i = 0; i < this.recordedSounds.length; i++) {
-        console.log('initial time: ' + this.recordedSounds[i].date)
-        if (i === 0) {
-          this.recordedSounds[i].date -= initialTime
-          toSubtract += this.recordedSounds[i].date
-        } else {
-          this.recordedSounds[i].date -= initialTime
-          this.recordedSounds[i].date -= toSubtract
-          toSubtract += this.recordedSounds[i].date
+      for (i = 0; i < sounds.length; i++) {
+        if (sounds[i].date >= this.initialTime) {
+          sounds[i].date %= this.initialTime
+          if (this.layer) {
+            sounds[i].date %= this.getRecordTime()
+          }
+          console.log('current hit: ' + sounds[i].key + ' and its time from first hit: ' + sounds[i].date)
+            // this.recordedSounds[i].date -= toSubtract
+            // toSubtract += this.recordedSounds[i].date
         }
-        console.log('new initial time: ' + this.recordedSounds[i].date)
       }
 
       var j
-      for (j = 0; j < this.recordedSounds.length; j++) {
-        var numSubdivisions = this.recordedSounds[j].date / subdivision // how many subdivisions fit in the raw time
+      for (j = 0; j < sounds.length; j++) {
+        var numSubdivisions = sounds[j].date / subdivision // how many subdivisions fit in the raw time
         numSubdivisions = Math.round(numSubdivisions) // round to the nearest 16th note
-        console.log('number of subdivisions: ' + numSubdivisions)
-        this.recordedSounds[j].date = numSubdivisions * subdivision // adjust new time to the time of a 16th note
-        console.log('this key plays this many milliseconds after playback starts: ' + this.recordedSounds[j].date)
+        sounds[j].date = numSubdivisions * subdivision // adjust new time to the time of a 16th note
+      }
+
+      if (this.layer) {
+        this.sortSounds()
+        clearTimeout(this.loopRecording)
       }
 
       // this.loopIt()
       this.end = true
-      clearTimeout(this.loop)
+      clearInterval(this.loopTempo)
       this.recording = false
     },
     getRecordTime () {
@@ -306,10 +304,8 @@ export default {
     playRecording (index) {
       var playback
       var vm = this
-      console.log('time to play the ' + index + 'sound in array')
 
       if (this.recordedSounds[index] === undefined) {
-        console.log('stopping playback on index: ' + index)
         clearTimeout(playback)
         this.playbackDone = true
       }
@@ -318,16 +314,14 @@ export default {
 
       if (!this.playbackDone) {
         playback = setTimeout(function () {
-          console.log('in timeout function')
           vm.playRecording(index + 1)
-        }, this.recordedSounds[index].date)
+        }, this.recordedSounds[index].date - this.recordedSounds[index - 1].date)
       } else {
         this.playbackDone = false
       }
     },
     playSound (sound, index) {
       var audioString = 'audio[data-key="' + sound[index].key + '"]'
-      console.log(audioString)
       var audio = document.querySelector(audioString)
       audio.currentTime = 0
       audio.play()
@@ -337,7 +331,7 @@ export default {
       var vm = this
 
       vm.playRecording(1)
-      this.loop = setTimeout(function () {
+      this.loopRecording = setTimeout(function () {
         vm.playRecording(1)
         vm.loopIt(this.recordedSounds)
       }, recordTime)
@@ -347,9 +341,29 @@ export default {
       this.recording = true
       this.layer = true
       this.firstKeyPressed = true
+      this.playTempo()
       this.loopIt()
     },
+    sortSounds () {
+      var x
+      var y
+
+      for (x = 0; x < this.layeredSounds.length; x++) {
+        this.recordedSounds.push(this.layeredSounds[x])
+      }
+
+      for (x = 0; x < this.recordedSounds.length; x++) {
+        for (y = x; y < this.recordedSounds.length; y++) {
+          if (this.recordedSounds[y].date < this.recordedSounds[x].date) {
+            var temp = this.recordedSounds[x]
+            this.recordedSounds[x] = this.recordedSounds[y]
+            this.recordedSounds[y] = temp
+          }
+        }
+      }
+    },
     finish () {
+      this.recordedSounds = []
       this.$emit('done')
       this.end = false
     }

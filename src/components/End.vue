@@ -78,7 +78,7 @@ export default {
         playback = setTimeout(function () {
           console.log('in timeout function')
           vm.playRecording(index + 1)
-        }, this.recordedSounds[index].date)
+        }, this.recordedSounds[index].date - this.recordedSounds[index - 1].date)
       } else {
         this.playbackDone = false
       }
