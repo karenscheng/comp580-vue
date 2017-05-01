@@ -4,93 +4,93 @@
     <div class="container">
 
       <div id="heading" class="text">
-        <p>Press keys to produce sounds!</p>
+        <p>Press keys on your keyboard to produce sounds!</p>
       </div>
 
     <div id="keys">
 
       <div class="keys">
         <div class="top-row">
-          <div data-key="81" class="key">
+          <div data-key="81" class="key" id="key-1">
             <span class="sound"></span>
           </div>
-          <div data-key="87" class="key">
+          <div data-key="87" class="key" id="key-2">
             <span class="sound"></span>
           </div>
-          <div data-key="69" class="key">
+          <div data-key="69" class="key" id="key-3">
             <span class="sound"></span>
           </div>
-          <div data-key="82" class="key">
+          <div data-key="82" class="key" id="key-4">
             <span class="sound"></span>
           </div>
-          <div data-key="84" class="key">
+          <div data-key="84" class="key" id="key-5">
             <span class="sound"></span>
           </div>
-          <div data-key="89" class="key">
+          <div data-key="89" class="key" id="key-6">
             <span class="sound"></span>
           </div>
-          <div data-key="85" class="key">
+          <div data-key="85" class="key" id="key-7">
             <span class="sound"></span>
           </div>
-          <div data-key="73" class="key">
+          <div data-key="73" class="key" id="key-8">
             <span class="sound"></span>
           </div>
-          <div data-key="79" class="key">
+          <div data-key="79" class="key" id="key-9">
             <span class="sound"></span>
           </div>
-          <div data-key="80" class="key">
+          <div data-key="80" class="key" id="key-10">
             <span class="sound"></span>
           </div>
         </div>
         <div class="middle-row">
-          <div data-key="65" class="key">
+          <div data-key="65" class="key" id="key-11">
             <span class="sound"></span>
           </div>
-          <div data-key="83" class="key">
+          <div data-key="83" class="key" id="key-12">
             <span class="sound"></span>
           </div>
-          <div data-key="68" class="key">
+          <div data-key="68" class="key" id="key-13">
             <span class="sound"></span>
           </div>
-          <div data-key="70" class="key">
+          <div data-key="70" class="key" id="key-14">
             <span class="sound"></span>
           </div>
-          <div data-key="71" class="key">
+          <div data-key="71" class="key" id="key-15">
             <span class="sound"></span>
           </div>
-          <div data-key="72" class="key">
+          <div data-key="72" class="key" id="key-16">
             <span class="sound"></span>
           </div>
-          <div data-key="74" class="key">
+          <div data-key="74" class="key" id="key-17">
             <span class="sound"></span>
           </div>
-          <div data-key="75" class="key">
+          <div data-key="75" class="key" id="key-18">
             <span class="sound"></span>
           </div>
-          <div data-key="76" class="key">
+          <div data-key="76" class="key" id="key-19">
             <span class="sound"></span>
           </div>
         </div>
         <div class="bottom-row">
-          <div data-key="65" class="key">
+          <div data-key="65" class="key" id="key-20">
             <span class="sound"></span>
           </div>
-          <div data-key="83" class="key">
+          <div data-key="83" class="key" id="key-21">
             <span class="sound"></span>
           </div>
-          <div data-key="68" class="key">
+          <div data-key="68" class="key" id="key-22">
             <span class="sound"></span>
           </div>
-          <div data-key="70" class="key">
+          <div data-key="70" class="key" id="key-23">
             <span class="sound"></span>
           </div>
-          <div data-key="71" class="key">
+          <div data-key="71" class="key" id="key-24">
             <span class="sound"></span>
           </div>
-          <div data-key="72" class="key">
+          <div data-key="72" class="key" id="key-25">
             <span class="sound"></span>
           </div>
-          <div data-key="74" class="key">
+          <div data-key="74" class="key" id="key-26">
             <span class="sound"></span>
           </div>
         </div>
@@ -211,7 +211,110 @@ export default {
   text-align: center;
   color: white;
   background: rgba(256, 256, 256, 0.8);
-  /*background: linear-gradient(141deg, #d597b6 0%, #c46b98 51%, #9c5579 75%);*/
+}
+
+#key-1{
+  background-image: url('/static/icons/airplane.svg');
+}
+
+#key-2{
+  background-image: url('/static/icons/tropical.svg');
+}
+
+#key-3{
+  background-image: url('/static/icons/bad-weather.svg');
+}
+
+#key-4{
+  background-image: url('/static/icons/canoe.svg');
+}
+
+#key-5{
+  background-image: url('/static/icons/bed.svg');
+}
+
+#key-6{
+  background-image: url('/static/icons/bell.svg');
+}
+
+#key-7{
+  background-image: url('/static/icons/bench.svg');
+}
+
+#key-8{
+  background-image: url('/static/icons/bus.svg');
+}
+
+#key-9{
+  background-image: url('/static/icons/tent.svg');
+}
+
+#key-10{
+  background-image: url('/static/icons/caravan.svg');
+}
+
+#key-11{
+  background-image: url('/static/icons/carrier.svg');
+}
+
+#key-12{
+  background-image: url('/static/icons/pamela.svg');
+}
+
+#key-13{
+  background-image: url('/static/icons/diving.svg');
+}
+
+#key-14{
+  background-image: url('/static/icons/hand-bag.svg');
+}
+
+#key-15{
+  background-image: url('/static/icons/hat.svg');
+}
+
+#key-16{
+  background-image: url('/static/icons/hot-air-balloon.svg');
+}
+
+#key-17{
+  background-image: url('/static/icons/ice-cream.svg');
+}
+
+#key-18{
+  background-image: url('/static/icons/map.svg');
+}
+
+#key-19{
+  background-image: url('/static/icons/mountain.svg');
+}
+
+#key-20{
+  background-image: url('/static/icons/postal.svg');
+}
+
+#key-21{
+  background-image: url('/static/icons/sailboat.svg');
+}
+
+#key-22{
+  background-image: url('/static/icons/sand-castle.svg');
+}
+
+#key-23{
+  background-image: url('/static/icons/sandals.svg');
+}
+
+#key-24{
+  background-image: url('/static/icons/ski.svg');
+}
+
+#key-25{
+  background-image: url('/static/icons/surf.svg');
+}
+
+#key-26{
+  background-image: url('/static/icons/sun-umbrella.svg');
 }
 
 .sound {
