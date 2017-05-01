@@ -202,7 +202,10 @@ export default {
       //   myDiv.addEventListener('transitionend', this.removeClass())
       //   console.log(myDiv)
       // }
-      this.record = true
+      if (!this.end) {
+        this.record = true
+      }
+
       var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
       try {
         audio.currentTime = 0
@@ -299,7 +302,9 @@ export default {
       // this.loopIt()
       this.end = true
       clearInterval(this.loopTempo)
+      this.record = false
       this.recording = false
+      console.log('at the end of quantize and recording value is ' + this.record)
     },
     getRecordTime () {
       // var tempo = document.getElementById('select').value
@@ -346,6 +351,7 @@ export default {
     },
     addLayer () {
       this.end = false
+      this.record = true
       this.recording = true
       this.layer = true
       this.firstKeyPressed = true
