@@ -3,7 +3,7 @@
 
     <div class="container">
 
-      <div id="heading" class="text" v-on:mouseover="instructionsMouseOver()">
+      <div id="heading" class="text">
         <p>Press keys on your keyboard to produce sounds!</p>
       </div>
 
@@ -144,12 +144,10 @@ export default {
 
   created () {
     window.addEventListener('keydown', this.keyPressed)
+    window.responsiveVoice.speak('Press keys on your keyboard to produce sounds!')
   },
 
   methods: {
-    instructionsMouseOver () {
-      window.responsiveVoice.speak('Press keys on your keyboard to produce sounds!')
-    },
     returnMouseOver () {
       window.responsiveVoice.speak('Back to homepage')
     },
