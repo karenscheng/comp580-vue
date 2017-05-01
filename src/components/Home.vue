@@ -2,11 +2,13 @@
 <div id = "home">
   <h1>Welcome to Build-A-Beat! </h1>
   <h2>Please choose from our two modes: Record Mode and Freeplay Mode. Record Mode allows you to make a beat and play it back, where Freeplay Mode allows you to play for as long as you'd like.</h2>
-  <div class="button" id="record" @click="startRecording">
-    <p class="text">RECORD</p>
-  </div>
-  <div class = "button" id ="freeplay" @click="startPlaying">
-    <p class="text">FREEPLAY</p>
+  <div class="button-div">
+    <div class="button" id="record" @click="startRecording">
+      <p class="text">RECORD</p>
+    </div>
+    <div class = "button" id ="freeplay" @click="startPlaying">
+      <p class="text">FREEPLAY</p>
+    </div>
   </div>
 </div>
 </template>
@@ -39,7 +41,11 @@ export default {
 <style scoped>
 
 #home {
-  padding-top: 10px;
+  padding: 10px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h1 {
