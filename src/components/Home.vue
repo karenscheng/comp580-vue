@@ -3,7 +3,7 @@
   <h1>Welcome to Build-A-Beat! </h1>
   <h2>Please choose from our two modes: Record Mode and Freeplay Mode. Record Mode allows you to make a beat and play it back, where Freeplay Mode allows you to play for as long as you'd like.</h2>
   <div class="button-div">
-    <div class="button" id="record" @click="startRecording">
+    <div class="button" id="record" @click="startRecording" v-on:mouseover="recordMouseOver()">
       <p class="text">RECORD</p>
     </div>
     <div class = "button" id ="freeplay" @click="startPlaying">
@@ -28,6 +28,9 @@ export default {
     }
   },
   methods: {
+    recordMouseOver () {
+      window.responsiveVoice.speak('Record')
+    },
     startRecording () {
       this.$emit('startRecording')
     },
