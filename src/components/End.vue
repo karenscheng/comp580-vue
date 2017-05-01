@@ -56,26 +56,26 @@ export default {
   data () {
     return {
       play: true,
-      loop: null
+      loop: null,
+      playback: null
     }
   },
 
   methods: {
     playRecording (index) {
-      var playback
       var vm = this
       console.log('time to play the ' + index + 'sound in array')
 
       if (this.recordedSounds[index] === undefined) {
         console.log('stopping playback on index: ' + index)
-        clearTimeout(playback)
+        clearTimeout(this.playback)
         this.playbackDone = true
       }
 
       this.playSound(this.recordedSounds, index - 1)
 
       if (!this.playbackDone) {
-        playback = setTimeout(function () {
+        this.playback = setTimeout(function () {
           console.log('in timeout function')
           vm.playRecording(index + 1)
         }, this.recordedSounds[index].date - this.recordedSounds[index - 1].date)
@@ -105,6 +105,7 @@ export default {
       if (!this.play) {
         this.loopIt()
       } else {
+        clearTimeout(this.playback)
         clearTimeout(this.loop)
       }
     },
