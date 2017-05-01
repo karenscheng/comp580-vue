@@ -34,6 +34,7 @@ export default {
 
   mounted () {
     console.log('App -> mounted.')
+    window.responsiveVoice.speak('Please choose from our two modes: Record Mode and Freeplay Mode. Record Mode allows you to make a beat and play it back, where Freeplay Mode allows you to play for as long as you\'d like.')
   },
 
   components: {
