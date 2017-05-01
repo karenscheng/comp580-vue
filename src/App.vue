@@ -52,6 +52,7 @@ export default {
       this.freeplay = false
     },
     startRecording () {
+      window.responsiveVoice.speak('Select Tempo')
       this.home = false
       this.tempo = true
     },

@@ -1,5 +1,5 @@
 <template>
-<div class = "recordprompt">
+<div class = "recordprompt" v-on:mouseover="introMouseOver()">
   <h1>We will start recording once you start playing! Press Enter to continue.</h1>
 </div>
 </template>
@@ -12,6 +12,9 @@ export default {
   },
 
   methods: {
+    introMouseOver () {
+      window.responsiveVoice.speak('Press keys on your keyboard to make sound, press enter to start!')
+    },
     keyPressed (e) {
       this.$emit('start')
     }

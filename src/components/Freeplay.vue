@@ -3,7 +3,7 @@
 
     <div class="container">
 
-      <div id="heading" class="text">
+      <div id="heading" class="text" v-on:mouseover="instructionsMouseOver()">
         <p>Press keys on your keyboard to produce sounds!</p>
       </div>
 
@@ -126,7 +126,7 @@
       <audio data-key="77" src="static/sounds/prism-3.mp3"></audio>
       </div>
 
-      <div id = "return" @click="returnHome">
+      <div id = "return" @click="returnHome" v-on:mouseover="returnMouseOver()">
         <p class="text">go back to homepage</p>
       </div>
     </div>
@@ -147,6 +147,12 @@ export default {
   },
 
   methods: {
+    instructionsMouseOver () {
+      window.responsiveVoice.speak('Press keys on your keyboard to produce sounds!')
+    },
+    returnMouseOver () {
+      window.responsiveVoice.speak('Back to homepage')
+    },
     keyPressed (e) {
       // uncomment below for some transitions that dont work :)
       // var myDiv = document.querySelector('div[data-key="' + e.keyCode + '"]')

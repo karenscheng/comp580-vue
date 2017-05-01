@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      <div class="cancel button" @click="goHome">
+      <div class="cancel button" @click="goHome" v-on:mouseover="cancelMouseOver()">
         <p class="text">cancel</p>
       </div>
 
@@ -170,6 +170,9 @@ export default {
   },
 
   methods: {
+    cancelMouseOver () {
+      window.responsiveVoice.speak('Cancel')
+    },
     startNow () {
       this.playTempo()
       this.prompt = false

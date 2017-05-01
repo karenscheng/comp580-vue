@@ -6,7 +6,7 @@
     <div class="button" id="record" @click="startRecording" v-on:mouseover="recordMouseOver()">
       <p class="text">RECORD</p>
     </div>
-    <div class = "button" id ="freeplay" @click="startPlaying">
+    <div class = "button" id ="freeplay" @click="startPlaying" v-on:mouseover="freeplayMouseOver()">
       <p class="text">FREEPLAY</p>
     </div>
   </div>
@@ -30,6 +30,9 @@ export default {
   methods: {
     recordMouseOver () {
       window.responsiveVoice.speak('Record')
+    },
+    freeplayMouseOver () {
+      window.responsiveVoice.speak('Freeplay')
     },
     startRecording () {
       this.$emit('startRecording')

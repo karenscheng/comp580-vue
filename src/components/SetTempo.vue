@@ -3,9 +3,9 @@
   <h1>Select Tempo!</h1>
 
   <div id = "circle-div">
-    <div id = "slow" class="circle" @click="slowTempo"><span class="circle-text">Slow</span></div>
-    <div id = "medium" class="circle" @click="mediumTempo"><span class="circle-text">Medium</span></div>
-    <div id = "fast" class="circle" @click="fastTempo"><span class="circle-text">Fast</span></div>
+    <div id = "slow" class="circle" @click="slowTempo" v-on:mouseover="slowMouseOver()"><span class="circle-text">Slow</span></div>
+    <div id = "medium" class="circle" @click="mediumTempo" v-on:mouseover="mediumMouseOver()"><span class="circle-text">Medium</span></div>
+    <div id = "fast" class="circle" @click="fastTempo" v-on:mouseover="fastMouseOver()"><span class="circle-text">Fast</span></div>
   </div>
 </div>
 </template>
@@ -20,6 +20,15 @@ export default {
   // },
 
   methods: {
+    slowMouseOver () {
+      window.responsiveVoice.speak('Slow')
+    },
+    mediumMouseOver () {
+      window.responsiveVoice.speak('Medium')
+    },
+    fastMouseOver () {
+      window.responsiveVoice.speak('Fast')
+    },
     slowTempo () {
       this.$emit('slowChosen')
     },

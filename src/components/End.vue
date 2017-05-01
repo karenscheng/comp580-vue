@@ -1,15 +1,15 @@
 <template>
 <div id = "end">
-  <div class="play-btn button" @click="togglePlay" v-if="play">
+  <div class="play-btn button" @click="togglePlay" v-if="play" v-on:mouseover="playMouseOver()">
     <p class="text">play recording</p>
   </div>
-  <div class="stop-btn button" @click="togglePlay" v-else>
+  <div class="stop-btn button" @click="togglePlay" v-else v-on:mouseover="stopMouseOver()">
     <p class="text">stop recording</p>
   </div>
-  <div class="layer-btn button" @click="addLayer">
+  <div class="layer-btn button" @click="addLayer" v-on:mouseover="addLayerMouseOver()">
     <p class="text">layer beat</p>
   </div>
-  <div class="start-over button" @click="startOver">
+  <div class="start-over button" @click="startOver" v-on:mouseover="startOverMouseOver()">
     <p class="text">START OVER</p>
   </div>
   <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
@@ -62,6 +62,18 @@ export default {
   },
 
   methods: {
+    playMouseOver () {
+      window.responsiveVoice.speak('Play Recording')
+    },
+    stopMouseOver () {
+      window.responsiveVoice.speak('Stop')
+    },
+    addLayerMouseOver () {
+      window.responsiveVoice.speak('Layer Beat')
+    },
+    startOverMouseOver () {
+      window.responsiveVoice.speak('Start Over')
+    },
     playRecording (index) {
       var vm = this
       console.log('time to play the ' + index + 'sound in array')
