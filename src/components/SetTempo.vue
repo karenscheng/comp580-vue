@@ -1,6 +1,6 @@
 <template>
 <div id = "SetTempo">
-  <h1>Select Tempo!</h1>
+  <h1 v-on:mouseover="sayTempo">Select Tempo!</h1>
 
   <div id = "circle-div">
     <div id = "slow" class="circle" @click="slowTempo" v-on:mouseover="slowMouseOver()"><span class="circle-text">Slow</span></div>
@@ -20,6 +20,9 @@ export default {
   // },
 
   methods: {
+    sayTempo () {
+      window.responsiveVoice.speak('Select tempo')
+    },
     slowMouseOver () {
       window.responsiveVoice.speak('Slow')
     },
