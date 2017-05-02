@@ -27,7 +27,6 @@ export default {
       window.responsiveVoice.speak('We will start recording once you start playing! Press Enter to continue.')
     }
   },
-
   methods: {
     keyPressed (e) {
       window.responsiveVoice.cancel()
