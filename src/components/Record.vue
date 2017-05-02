@@ -180,15 +180,12 @@ export default {
       if (!this.end) {
         this.recording = true
       }
-      // this.recording = false
-      // this.end = true
     },
     playTempo () {
       var tempo = 60 / this.speed * 1000
       var vm = this
       this.loopTempo = setInterval(function () {
         vm.playClick(76)
-        // vm.playTempo()
       }, tempo)
     },
     playClick (index) {
@@ -198,13 +195,6 @@ export default {
       audio.play()
     },
     keyPressed (e) {
-      // uncomment below for some transitions that dont work :)
-      // var myDiv = document.querySelector('div[data-key="' + e.keyCode + '"]')
-      // if (myDiv) {
-      //   myDiv.classList.add('playing')
-      //   myDiv.addEventListener('transitionend', this.removeClass())
-      //   console.log(myDiv)
-      // }
       if (!this.end) {
         this.record = true
       }
@@ -240,10 +230,8 @@ export default {
 
         if (this.layer) {
           this.layeredSounds.push(newSound)
-          console.table(this.layeredSounds)
         } else {
           this.recordedSounds.push(newSound)
-          console.table(this.recordedSounds)
         }
       }
     },
@@ -262,41 +250,34 @@ export default {
     },
     quantize (tempo) {
       var sounds
+      var vm = this
 
-      if (this.layer) {
-        sounds = this.layeredSounds
+      if (vm.layer) {
+        sounds = vm.layeredSounds
       } else {
-        sounds = this.recordedSounds
+        sounds = vm.recordedSounds
       }
 
       var subdivision = 60 / tempo
       subdivision = subdivision / 2 // subdivision is how much time between each 16th note
       subdivision = subdivision * 1000 // convert subdivision to milliseconds
 
-      if (!this.layer) {
-        this.initialTime = sounds[0].date // sets the time of the first hit to adjust time of other hits to be relative
-        console.log('first initial time: ' + this.initialTime)
+      if (!vm.layer) {
+        vm.initialTime = sounds[0].date // sets the time of the first hit to adjust time of other hits to be relative
       }
 
       var i
       for (i = 0; i < sounds.length; i++) {
-        console.log('initial layered hit time: ' + sounds[i].date)
-        console.log('initial initalTime: ' + this.initialTime)
-        if (sounds[i].date <= this.initialTime) {
-          console.log('initial time was too big, scale it down by one measure')
-          this.initalTime -= this.getRecordTime()
+        if (sounds[i].date <= vm.initialTime) {
+          if (vm.layer) {
+            sounds[i].date += vm.getRecordTime()
+          }
+          // vm.initalTime -= this.getRecordTime()
         }
-        sounds[i].date %= this.initialTime
-        console.log('layered time after modding by initial time: ' + sounds[i].date)
-        if (this.layer) {
-          console.log('record time is: ' + this.getRecordTime())
-          sounds[i].date %= this.getRecordTime()
-          console.log('layered time after modding by record time: ' + sounds[i].date)
+        sounds[i].date %= vm.initialTime
+        if (vm.layer) {
+          sounds[i].date %= vm.getRecordTime()
         }
-        console.log(this.initialTime)
-        // console.log('current hit: ' + sounds[i].key + ' and its time from first hit: ' + sounds[i].date)
-            // this.recordedSounds[i].date -= toSubtract
-            // toSubtract += this.recordedSounds[i].date
       }
 
       var j
@@ -306,17 +287,16 @@ export default {
         sounds[j].date = numSubdivisions * subdivision // adjust new time to the time of a 16th note
       }
 
-      if (this.layer) {
-        this.sortSounds()
-        clearTimeout(this.loopRecording)
+      if (vm.layer) {
+        vm.sortSounds()
+        clearTimeout(vm.loopRecording)
       }
 
       // this.loopIt()
-      this.end = true
-      clearInterval(this.loopTempo)
-      this.record = false
-      this.recording = false
-      console.log('at the end of quantize and recording value is ' + this.record)
+      vm.end = true
+      clearInterval(vm.loopTempo)
+      vm.record = false
+      vm.recording = false
     },
     getRecordTime () {
       // var tempo = document.getElementById('select').value
@@ -353,10 +333,9 @@ export default {
       var recordTime = this.getRecordTime()
       var vm = this
 
+      vm.initialTime = new Date().getTime()
       vm.playRecording(1)
       this.loopRecording = setTimeout(function () {
-        vm.initialTime = new Date().getTime()
-        console.log('new initial time: ' + vm.initialTime)
         vm.playRecording(1)
         vm.loopIt(this.recordedSounds)
       }, recordTime)

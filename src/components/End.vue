@@ -6,7 +6,7 @@
   <div class="stop-btn button" @click="togglePlay" v-else v-on:mouseover="stopMouseOver()">
     <p class="text">stop recording</p>
   </div>
-  <div class="layer-btn button" @click="addLayer" v-on:mouseover="addLayerMouseOver()">
+  <div v-if="!playing" class="layer-btn button" @click="addLayer" v-on:mouseover="addLayerMouseOver()">
     <p class="text">layer beat</p>
   </div>
   <div class="start-over button" @click="startOver" v-on:mouseover="startOverMouseOver()">
@@ -56,6 +56,7 @@ export default {
   data () {
     return {
       play: true,
+      playing: false,
       loop: null,
       playback: null
     }
@@ -115,8 +116,10 @@ export default {
     togglePlay () {
       this.play = !this.play
       if (!this.play) {
+        this.playing = true
         this.loopIt()
       } else {
+        this.playing = false
         clearTimeout(this.playback)
         clearTimeout(this.loop)
       }
