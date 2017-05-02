@@ -27,6 +27,9 @@ export default {
       record: false
     }
   },
+  created () {
+    window.responsiveVoice.speak('Welcome to Build A Beat!')
+  },
   methods: {
     recordMouseOver () {
       window.responsiveVoice.speak('Record')
