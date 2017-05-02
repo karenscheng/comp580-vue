@@ -1,7 +1,7 @@
 # comp580
 
 > A web app beat maker: 
-[karenscheng.com/buildabeat](https://www.karenscheng.com/buildabeat)
+[karenscheng.com/buildabeat](http://www.karenscheng.com/buildabeat)
 
 ## Build Setup
 
