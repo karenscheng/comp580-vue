@@ -7,7 +7,7 @@
     <p class="text">stop recording</p>
   </div>
   <div v-if="!playing" class="layer-btn button" @click="addLayer" v-on:mouseover="addLayerMouseOver()">
-    <p class="text">layer beat</p>
+    <p class="text">add more layers to your beat</p>
   </div>
   <div class="start-over button" @click="startOver" v-on:mouseover="startOverMouseOver()">
     <p class="text">START OVER</p>
@@ -70,7 +70,7 @@ export default {
       window.responsiveVoice.speak('Stop')
     },
     addLayerMouseOver () {
-      window.responsiveVoice.speak('Layer Beat')
+      window.responsiveVoice.speak('Click to add layers to your awesome beat')
     },
     startOverMouseOver () {
       window.responsiveVoice.speak('Start Over')

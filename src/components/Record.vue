@@ -1,11 +1,9 @@
 <template>
   <div class="record">
-    <RecordPrompt v-if="prompt" @start="startNow"></RecordPrompt>
+    <RecordPrompt v-if="prompt" :first="first" @startTempo="startTempo" @startRecording="startRecording"></RecordPrompt>
     <End v-if="end" :recordedSounds="recordedSounds" :speed="speed" @done="finish" @addlayer="addLayer"></End>
 
     <div id="keys" v-if="recording">
-
-      <h1>Press keys on your keyboard to make sound, we will start recording once you play your first sound!</h1>
 
       <div class="keys">
         <div class="top-row">
@@ -94,8 +92,12 @@
         </div>
       </div>
 
-      <div class="cancel button" @click="goHome" v-on:mouseover="cancelMouseOver()">
+      <div v-if="ready" class="cancel button" @click="goHome" v-on:mouseover="cancelMouseOver()">
         <p class="text">cancel</p>
+      </div>
+
+      <div v-if="!ready" class="start button" @click="readyPrompt" v-on:mouseover="startMouseOver()">
+        <p class="text">start recording</p>
       </div>
 
       <audio data-key="81" src="static/sounds/bubbles.mp3"></audio>
@@ -151,16 +153,18 @@ export default {
       play: false,
       record: true,
       prompt: true,
+      ready: false,
       recording: false,
       end: false,
       loopTempo: null,
       loopRecording: null,
       layer: false,
-      initialTime: 0
+      initialTime: 0,
+      first: true
     }
   },
 
-  mounted () {
+  created () {
     window.addEventListener('keydown', this.keyPressed)
   },
 
@@ -173,9 +177,27 @@ export default {
     cancelMouseOver () {
       window.responsiveVoice.speak('Cancel')
     },
-    startNow () {
+    startMouseOver () {
+      window.responsiveVoice.speak('Start recording')
+    },
+    readyPrompt () {
+      this.prompt = true
+      this.recording = false
+      this.first = false
+    },
+    startRecording () {
+      // const tempo = this.speed
+      // this.startTempo()
+      this.ready = true
+      this.prompt = false
+      if (!this.end) {
+        this.recording = true
+      }
+    },
+    startTempo () {
       this.playTempo()
       this.prompt = false
+      this.ready = false
 
       if (!this.end) {
         this.recording = true
@@ -195,7 +217,7 @@ export default {
       audio.play()
     },
     keyPressed (e) {
-      if (!this.end) {
+      if (this.ready) {
         this.record = true
       }
 
@@ -237,16 +259,6 @@ export default {
     },
     removeClass (e) {
       console.log(e)
-    },
-    startRecording (e) {
-      // var tempo = document.getElementById('select').value
-      const tempo = this.speed
-      if (tempo === 'default') {
-        // document.getElementById('pressRecord').css('visibility', 'hidden')
-        this.record = false
-      } else {
-        this.record = true
-      }
     },
     quantize (tempo) {
       var sounds
@@ -447,7 +459,9 @@ h1{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250px;
+  width: 60vw;
+  height: 20vh;
+
   border-radius: 20px;
   margin: auto;
   text-align: center;
@@ -457,16 +471,24 @@ h1{
 
 .cancel {
   background-color: #e67c84;
-  height: 12vh;
-  margin-top: 5vh;
+  margin-top: 10vh;
 }
 
 .cancel:hover {
   background-color: #eb969c;
 }
 
-.cancel .text {
+.cancel .text, .start .text {
   font-size: 34px;
+}
+
+.start {
+  margin-top: 10vh;
+  background-color: #6bc497;
+}
+
+.start:hover {
+  background-color: #97d5b6;
 }
 
 #key-1{

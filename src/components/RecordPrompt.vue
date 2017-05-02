@@ -1,22 +1,43 @@
 <template>
-<div class = "recordprompt" v-on:mouseover="introMouseOver()">
-  <h1>We will start recording once you start playing! Press Enter to continue.</h1>
-</div>
+  <div class = "recordprompt">
+    <div v-if="first">
+      <h1>You can practice playing with the tempo, when you are ready to record, press
+      the button at the bottom of the screen. Press any button to continue</h1>
+    </div>
+    <div v-if="!first">
+      <h1>We will start recording once you start playing! Press Enter to continue.</h1>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'recordprompt',
-  mounted () {
+
+  props: [
+    'first'
+  ],
+
+  created () {
     window.addEventListener('keydown', this.keyPressed)
+    if (this.first) {
+      window.responsiveVoice.speak('You can practice playing with the tempo, when you are ready to record, press' +
+      'the button at the bottom of the screen. Press any button to continue')
+    } else {
+      window.responsiveVoice.speak('We will start recording once you start playing! Press Enter to continue.')
+    }
   },
 
   methods: {
-    introMouseOver () {
-      window.responsiveVoice.speak('Press keys on your keyboard to make sound, press enter to start!')
-    },
     keyPressed (e) {
-      this.$emit('start')
+      window.responsiveVoice.cancel()
+      if (this.first) {
+        this.$emit('startTempo')
+      } else {
+        if (e.keyCode === 13) {
+          this.$emit('startRecording')
+        }
+      }
     }
   }
 }
