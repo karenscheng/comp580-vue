@@ -221,13 +221,15 @@ export default {
         this.record = true
       }
 
-      var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
-      try {
-        audio.currentTime = 0
-        audio.play()
-      } catch (err) {
-        console.log('Key pressed but no audio associated')
-        this.record = false
+      if (!this.end) {
+        var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]')
+        try {
+          audio.currentTime = 0
+          audio.play()
+        } catch (err) {
+          console.log('Key pressed but no audio associated')
+          this.record = false
+        }
       }
 
       if (this.record) {
